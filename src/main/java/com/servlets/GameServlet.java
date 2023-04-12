@@ -97,7 +97,7 @@ public class GameServlet extends HttpServlet {
 		
 	}
 	public static void replay(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().removeAttribute("dice");
+		request.getSession().setAttribute("dice",null);
 		request.getSession().removeAttribute("error");
 		request.getSession().removeAttribute("result");
 		request.getSession().removeAttribute("GameParyEnd");
