@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import com.ba.User;
+import com.ba.LeaderBoard;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -36,17 +37,17 @@ public class GameServlet extends HttpServlet {
 		String playPage = "/playForm.jsp";
 		String diceErrorPage = "/diceError.jsp";
 		String action = request.getParameter("action");
-		HashMap<String, Integer> map = new HashMap<>();
+		HashMap<String, Integer> map ;
 		ServletContext contx = getServletContext();
 		if(contx.getAttribute("leaderboard")==null) {
+			map = new HashMap<>();
 			contx.setAttribute("leaderboard",map);
+		}else {
+			map = (HashMap<String, Integer>) contx.getAttribute("leaderboard");
 		}
 		if (action!=null && action.equals("replay")) {
 			replay(request,response);
 		}
-//		} else if(action!=null && action.equals("deconnect")) {
-//			deconnect(request,response);
-//		}
 		else { 
 			String dice_number = request.getParameter("diceNumber");
 			User connectedUser = (User) ss.getAttribute("connecteduser");
@@ -59,6 +60,10 @@ public class GameServlet extends HttpServlet {
 				}
 				if(connectedUser.isDicePlayed(Integer.valueOf(dice_number))) {
 					ss.setAttribute("error", true);
+					if(connectedUser.getBestScore()==null) {
+						connectedUser.setBestScore(-1);
+						map.put(connectedUser.getLogin(), connectedUser.getBestScore());
+					}
 					request.getRequestDispatcher(playPage).forward(request, response);
 					return;
 				}
@@ -79,16 +84,19 @@ public class GameServlet extends HttpServlet {
 						else if(connectedUser.getRes(1)<connectedUser.getRes(2) && connectedUser.getRes(2)<connectedUser.getRes(3)) {
 							score = connectedUser.getRes(1)+connectedUser.getRes(2)+connectedUser.getRes(3);
 						}
-						if(score>connectedUser.getBestScore()) {
+						
+						if(connectedUser.getBestScore()==null || score>connectedUser.getBestScore()) {
 							connectedUser.setBestScore(score);
 							
 						}
-						if(contx.getAttribute("leaderboard")==null) {
-							map = new HashMap<>();
-							contx.setAttribute("leaderboard",map);
-						}else {
-							map = (HashMap<String,Integer>) contx.getAttribute("leaderboard");
-						}
+//						if(contx.getAttribute("leaderboard")==null) {
+//							map = new HashMap<>();
+//							contx.setAttribute("leaderboard",map);
+//						}else {
+//							map = (HashMap<String,Integer>) contx.getAttribute("leaderboard");
+//						}
+						
+						connectedUser.setBestScore(score);
 						map.put(connectedUser.getLogin(), connectedUser.getBestScore());
 						ss.setAttribute("score", score);
 						request.getRequestDispatcher(playPage).forward(request, response);
@@ -111,8 +119,8 @@ public class GameServlet extends HttpServlet {
 		boolean [] replay = new boolean[3];
 		replay[0] = replay[1] = replay[2] =false;
 		u.setDices(replay);
-		if((Integer)u.getBestScore()==null) {
-			u.setBestScore(-1);
-		}
+//		if((Integer)u.getBestScore()==null) {
+//			u.setBestScore(null);
+//		}
 	}
 }

@@ -7,7 +7,7 @@ public class User {
 	private String passWord;
 	private boolean[] dices = new boolean[3];
 	private int[] results = new int[3];
-	private int bestScore;
+	private Integer bestScore;
 	public User() {
 		
 		this.dices[0]=false;
@@ -15,7 +15,7 @@ public class User {
 		this.dices[2]=false;
 	}
 	
-	public User(String userName, String login, String passWord, boolean[] dices, int bestScore) {
+	public User(String userName, String login, String passWord, boolean[] dices, Integer bestScore) {
 		this.userName = userName;
 		this.login = login;
 		this.passWord = passWord;
@@ -48,10 +48,10 @@ public class User {
 	public void setDices(boolean[] dices) {
 		this.dices = dices;
 	}
-	public int getBestScore() {
+	public Integer getBestScore() {
 		return bestScore;
 	}
-	public void setBestScore(int bestScore) {
+	public void setBestScore(Integer bestScore) {
 		this.bestScore = bestScore;
 	}
 	public boolean equals(User user) {
