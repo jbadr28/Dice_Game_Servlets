@@ -14,7 +14,53 @@
 		crossorigin="anonymous">
 	<meta charset="UTF-8">
 	<title>LeaderBoard</title>
+	<script type="text/javascript">
+	function redirectLogin(){
+		var xhr = new XMLHttpRequest();
+		  //xhr.open("GET", "GameServlet?action=deconnect", true);
+		  xhr.open("GET", "Deconnect", true);
+		  xhr.onload = function() {
+		    if (this.status == 200) {
+		      // if the request is successful, redirect the user to the home page
+		      window.location.href = "home.jsp";
+		    }
+		  };
+		  xhr.send();
+	}
+	function redirectReplay() {
+		var xhr = new XMLHttpRequest();
+		  xhr.open("GET", "GameServlet?action=replay", true);
+		  xhr.onload = function() {
+		    if (this.status == 200) {
+		      window.location.href = "playForm.jsp";
+		    }
+		  };
+		  xhr.send();
+		
+	}
+	</script>
 	<style>
+		.nice-button {
+		  background-color: #ff7f50;
+		  background-image: linear-gradient(to bottom right, #ff7f50, #ffaf40);
+		  border: none;
+		  border-radius: 5px;
+		  color: #fff;
+		  cursor: pointer;
+		  display: inline-block;
+		  font-size: 16px;
+		  font-weight: bold;
+		  padding: 10px 20px;
+		  text-align: center;
+		  text-decoration: none;
+		  transition: all 0.3s ease;
+  		  
+		}
+		
+		.nice-button:hover {
+		  background-image: linear-gradient(to bottom right, #ffaf40, #ff7f50);
+		  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
 		table {
 			border-collapse: collapse;
 			width: 100%;
@@ -70,10 +116,20 @@
 				text-align: left;
 				font-weight: bold;
 			}
+			body {
+		  /*background: #76b852; /* fallback for old browsers */
+		  background: rgb(141,194,111);
+		  background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+		  font-family: "Roboto", sans-serif;
+		  -webkit-font-smoothing: antialiased;
+		  -moz-osx-font-smoothing: grayscale;      
+		}
 		}
 </style>
 </head>
 <body >
+<button  class="nice-button" onclick="redirectReplay()" style="margin-left: 300px; margin-top: 30px;">Replay</button>
+<button  class="nice-button" onclick="redirectLogin()" style="margin-left: 300px; margin-top: 30px;">Sign Out</button>
 <form action="LeaderBoardServlets" m>
 <table
 				style="text-align: center; font-size: 15px; line-height: 30px; margin-left: auto; margin-right: auto; margin-top: 10px;">

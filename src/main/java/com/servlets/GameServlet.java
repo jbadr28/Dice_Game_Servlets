@@ -85,7 +85,7 @@ public class GameServlet extends HttpServlet {
 							score = connectedUser.getRes(1)+connectedUser.getRes(2)+connectedUser.getRes(3);
 						}
 						
-						if(connectedUser.getBestScore()==null || score>connectedUser.getBestScore()) {
+						if(connectedUser.getBestScore()!=null && score>connectedUser.getBestScore()) {
 							connectedUser.setBestScore(score);
 							
 						}

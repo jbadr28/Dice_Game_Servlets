@@ -9,15 +9,29 @@
 <meta charset="UTF-8">
 <title>Game</title>
 
-		<script type="text/javascript">
-		
-		$('.message a').click(function(){
-			   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-			});
-		</script>
 		<style type="text/css">
 		@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+		.nice-button {
+		  background-color: #ff7f50;
+		  background-image: linear-gradient(to bottom right, #ff7f50, #ffaf40);
+		  border: none;
+		  border-radius: 5px;
+		  color: #fff;
+		  cursor: pointer;
+		  display: inline-block;
+		  font-size: 16px;
+		  font-weight: bold;
+		  padding: 10px 20px;
+		  text-align: center;
+		  text-decoration: none;
+		  transition: all 0.3s ease;
+  		  
+		}
 		
+		.nice-button:hover {
+		  background-image: linear-gradient(to bottom right, #ffaf40, #ff7f50);
+		  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
 		.login-page {
 		  width: 360px;
 		  padding: 8% 0 0;
@@ -127,9 +141,9 @@
 </head>
 <body style="background-color: green">
 	<form action="GameServlet" method="POST">
-		<div style="width: 100%; display: table;">
+		<div style="width: 100%; display: table; border-spacing: 40px;">
    			<div style="display: table-row">
-        		<div style="height:300px;width:30%;text-align:center;background-color:powderblue;padding: 50px 0; border-radius: 100px;border-color: Red;border: 5px solid;line-height: 60px;width: 600px; display: table-cell;"> 
+        		<div style="text-align:center;background-color:powderblue;padding: 50px 0; border-radius: 50px;border-color: Red;border: 5px solid;line-height: 60px;width: 600px; display: table-cell;"> 
         			<select name="diceNumber"
 					style="background-color: green;border-color: gb(52, 75, 11); font-size: 20px; text-align: center;">
 						<option value="none">Launch a Dice</option>
@@ -143,7 +157,6 @@
 	
         		</div>
         		<script type="text/javascript">
-
 				function redirectReplay() {
 					var xhr = new XMLHttpRequest();
 					  xhr.open("GET", "GameServlet?action=replay", true);
@@ -242,7 +255,7 @@
 						})
 				}
         		</script>
-        		<div style=" height:300px;width:30%;text-align:center;background-color:powderblue;padding: 50px 0; border-radius: 100px;border: 5px solid;line-height: 60px;display: table-cell;"> 
+        		<div style="text-align:center;background-color:powderblue;padding: 50px 0; border-radius: 50px;border: 5px solid;line-height: 60px;display: table-cell;"> 
 					<% 
 						if(request.getSession().getAttribute("GameParyEnd")!=null){
 					        out.print("<script type=\"text/javascript\">");
@@ -275,8 +288,6 @@
     		</div>
 		</div>
 	</form>
-	<div align="center" style="text-align:center;height:80px;width:50%;margin:auto;background-color:powderblue;padding: 10px ; border-radius: 50px;border: 5px solid;">
-		<a href="leaderboard.jsp">LeaderBoard</a>
-	</div>
+	<button  class="nice-button" onclick="location.href='leaderboard.jsp'" style="margin-left: 600px; margin-top: 30px;">LeaderBoard</button>
 </body>
 </html>
