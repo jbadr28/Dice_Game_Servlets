@@ -69,7 +69,7 @@ public class GameServlet extends HttpServlet {
 				}
 		
 				else {
-					ss.setAttribute("dice", "dice number "+dice_number+" first time to be played");
+					ss.setAttribute("dice", "dice number "+dice_number+" is launched for the first time");
 					((User) ss.getAttribute("connecteduser")).playDice(Integer.valueOf(dice_number));
 					Random rn = new Random();
 					int result = rn.nextInt(6)+1;

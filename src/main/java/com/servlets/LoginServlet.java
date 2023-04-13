@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 			if (foundUser != null) {
 				out.print("succesfuly connected as : "+foundUser.getUserName());
 				request.getSession().setAttribute("connecteduser", foundUser);
-				request.getRequestDispatcher("connected.jsp").forward(request, response);
+				request.getRequestDispatcher("playForm.jsp").forward(request, response);
 				return;
 				
 			} else {
