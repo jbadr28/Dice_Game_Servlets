@@ -32,11 +32,9 @@ public class CreateUserServlet extends HttpServlet {
 		String errorPage = "/Error.jsp";
 		String loginPage = "/home.jsp";
 		String singUpPage = "/SignUpForm.jsp";
-		HashMap<String, Integer> map = new HashMap<>();
+		HashMap<String, Integer> map ;
 		
-		if(contx.getAttribute("leaderboard")==null) {
-			contx.setAttribute("leaderboard",map);
-		}
+
 		if(action!=null && action.equals("create")) {
 			String nom = request.getParameter("name");
 			String login = request.getParameter("Login");
@@ -51,7 +49,7 @@ public class CreateUserServlet extends HttpServlet {
 				contx.setAttribute("userlist", userlist);
 			}else {
 				for(User us :(ArrayList<User>) contx.getAttribute("userlist")) {
-					if(user.equals(us)) {
+					if(user.getLogin().equals(us.getLogin())) {
 						request.setAttribute("error", "User Already Exist !!");
 						contx.getRequestDispatcher(errorPage).forward(request, response);
 						return;

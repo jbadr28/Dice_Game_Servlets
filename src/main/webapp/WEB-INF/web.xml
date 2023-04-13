@@ -49,4 +49,14 @@
     <servlet-name>DeconnectServlet</servlet-name>
     <url-pattern>/DeconnectServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LeaderBoardServlets</display-name>
+    <servlet-name>LeaderBoardServlets</servlet-name>
+    <servlet-class>com.servlets.LeaderBoardServlets</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LeaderBoardServlets</servlet-name>
+    <url-pattern>/LeaderBoardServlets</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -58,10 +58,6 @@ public class GameServlet extends HttpServlet {
 					return;
 				}
 				if(connectedUser.isDicePlayed(Integer.valueOf(dice_number))) {
-					//ss.setAttribute("dice", "dice number "+dice_number+" is already played");
-					//Random rn = new Random();
-					//int result = rn.nextInt(6)+1;
-					//ss.setAttribute("result", result);
 					ss.setAttribute("error", true);
 					request.getRequestDispatcher(playPage).forward(request, response);
 					return;
@@ -85,7 +81,15 @@ public class GameServlet extends HttpServlet {
 						}
 						if(score>connectedUser.getBestScore()) {
 							connectedUser.setBestScore(score);
+							
 						}
+						if(contx.getAttribute("leaderboard")==null) {
+							map = new HashMap<>();
+							contx.setAttribute("leaderboard",map);
+						}else {
+							map = (HashMap<String,Integer>) contx.getAttribute("leaderboard");
+						}
+						map.put(connectedUser.getLogin(), connectedUser.getBestScore());
 						ss.setAttribute("score", score);
 						request.getRequestDispatcher(playPage).forward(request, response);
 						return;
@@ -97,7 +101,7 @@ public class GameServlet extends HttpServlet {
 		
 	}
 	public static void replay(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("dice",null);
+		request.getSession().removeAttribute("dice");
 		request.getSession().removeAttribute("error");
 		request.getSession().removeAttribute("result");
 		request.getSession().removeAttribute("GameParyEnd");
@@ -111,16 +115,4 @@ public class GameServlet extends HttpServlet {
 			u.setBestScore(-1);
 		}
 	}
-//	public static void deconnect(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-//		User u = (User) request.getSession().getAttribute("connecteduser");
-//		boolean [] replay = new boolean[3];
-//		replay[0] = replay[1] = replay[2] =false;
-//		u.setDices(replay);
-//		if((Integer)u.getBestScore()==null) {
-//			u.setBestScore(-1);
-//		}
-//		request.getSession().invalidate();
-//		
-//	}
-
 }
