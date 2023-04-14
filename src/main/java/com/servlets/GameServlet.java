@@ -85,18 +85,11 @@ public class GameServlet extends HttpServlet {
 							score = connectedUser.getRes(1)+connectedUser.getRes(2)+connectedUser.getRes(3);
 						}
 						
-						if(connectedUser.getBestScore()!=null && score>connectedUser.getBestScore()) {
+						if(connectedUser.getBestScore() == null || score>connectedUser.getBestScore()) {
 							connectedUser.setBestScore(score);
 							
 						}
-//						if(contx.getAttribute("leaderboard")==null) {
-//							map = new HashMap<>();
-//							contx.setAttribute("leaderboard",map);
-//						}else {
-//							map = (HashMap<String,Integer>) contx.getAttribute("leaderboard");
-//						}
 						
-						connectedUser.setBestScore(score);
 						map.put(connectedUser.getLogin(), connectedUser.getBestScore());
 						ss.setAttribute("score", score);
 						request.getRequestDispatcher(playPage).forward(request, response);
@@ -119,8 +112,5 @@ public class GameServlet extends HttpServlet {
 		boolean [] replay = new boolean[3];
 		replay[0] = replay[1] = replay[2] =false;
 		u.setDices(replay);
-//		if((Integer)u.getBestScore()==null) {
-//			u.setBestScore(null);
-//		}
 	}
 }

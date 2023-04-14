@@ -13,6 +13,7 @@ public class User {
 		this.dices[0]=false;
 		this.dices[1]=false;
 		this.dices[2]=false;
+		
 	}
 	
 	public User(String userName, String login, String passWord, boolean[] dices, Integer bestScore) {

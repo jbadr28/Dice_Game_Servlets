@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="jakarta.servlet.http.HttpServletRequest" %>
 <%@ page import="com.servlets.GameServlet" %>
+<%@ page import="com.ba.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,7 +140,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
-<body style="background-color: green">
+<h2 style="text-align: center">Welcome <%
+	 				User us = (User) request.getSession().getAttribute("connecteduser");
+					out.print("<b><a style=\"color:gold\"> "+us.getLogin()+"</a></b>, You are Successfully connected"); %></h2>
+<body >
 	<form action="GameServlet" method="POST">
 		<div style="width: 100%; display: table; border-spacing: 40px;">
    			<div style="display: table-row">
@@ -255,7 +259,9 @@
 						})
 				}
         		</script>
-        		<div style="text-align:center;background-color:powderblue;padding: 50px 0; border-radius: 50px;border: 5px solid;line-height: 60px;display: table-cell;"> 
+        		
+        		<div style="text-align:center;background-color:powderblue;padding: 30px 0; border-radius: 50px;border: 5px solid;display: table-cell;"> 
+					
 					<% 
 						if(request.getSession().getAttribute("GameParyEnd")!=null){
 					        out.print("<script type=\"text/javascript\">");
@@ -276,7 +282,7 @@
 						}
 						if(request.getSession().getAttribute("result")!=null){
 							int result = (int) request.getSession().getAttribute("result");
-							out.print("<h3>the result is"+result+"</h3><br>");
+							out.print("<h3>the result is "+result+"</h3><br>");
 							String image = "picture/"+result;
 							out.print("<img src=\"picture/"+result+".png\" alt=\"Dice\" width=\"256\" height=\"256\">");
 						} else{
@@ -288,6 +294,9 @@
     		</div>
 		</div>
 	</form>
-	<button  class="nice-button" onclick="location.href='leaderboard.jsp'" style="margin-left: 600px; margin-top: 30px;">LeaderBoard</button>
+	<div>
+		<button  class="nice-button" onclick="location.href='leaderboard.jsp'" style="margin-left:400px;">LeaderBoard</button>
+		<button  class="nice-button" onclick="redirectLogin()" style="margin-left:300px;">Sign Out</button>
+	</div>
 </body>
 </html>
