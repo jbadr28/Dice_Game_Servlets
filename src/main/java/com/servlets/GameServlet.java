@@ -22,7 +22,7 @@ public class GameServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		HttpSession ss = request.getSession();
 		PrintWriter pw = response.getWriter();
 		ss.setAttribute("dice", null);
@@ -73,8 +73,29 @@ public class GameServlet extends HttpServlet {
 					((User) ss.getAttribute("connecteduser")).playDice(Integer.valueOf(dice_number));
 					Random rn = new Random();
 					int result = rn.nextInt(6)+1;
+					if((Integer)ss.getAttribute("result")!=null && ((Integer)ss.getAttribute("result")).equals(result)) {
+						ss.setAttribute("GameParyEnd", true);
+						if(connectedUser.getBestScore() == null || 0>connectedUser.getBestScore()) {
+							connectedUser.setBestScore(0);
+						}
+						map.put(connectedUser.getLogin(), connectedUser.getBestScore());
+						ss.setAttribute("score", 0);
+						request.getRequestDispatcher(playPage).forward(request, response);
+						return;
+					}
 					ss.setAttribute("result", result);
 					connectedUser.setRes(result, Integer.valueOf(dice_number));
+					if(Integer.valueOf(dice_number).equals(2) && (result==1 || result==6)) {
+						ss.setAttribute("GameParyEnd", true);
+						if(connectedUser.getBestScore() == null || 0>connectedUser.getBestScore()) {
+							connectedUser.setBestScore(0);
+						}
+						map.put(connectedUser.getLogin(), connectedUser.getBestScore());
+						ss.setAttribute("score", 0);
+						request.getRequestDispatcher(playPage).forward(request, response);
+						return;
+					}
+					
 					if(connectedUser.isPlayedAllDices()) {
 						ss.setAttribute("GameParyEnd", true);
 						int score = 0;

@@ -150,7 +150,7 @@
         		<div style="text-align:center;background-color:powderblue;padding: 50px 0; border-radius: 50px;border-color: Red;border: 5px solid;line-height: 60px;width: 600px; display: table-cell;"> 
         			<select name="diceNumber"
 					style="background-color: green;border-color: gb(52, 75, 11); font-size: 20px; text-align: center;">
-						<option value="none">Launch a Dice</option>
+						<option value="none">Pick a Dice</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>

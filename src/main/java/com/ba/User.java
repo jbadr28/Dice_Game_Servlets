@@ -65,7 +65,10 @@ public class User {
 		this.dices[diceNumber-1] = true ;
 	}
 	public boolean isPlayedAllDices() {
-		return isDicePlayed(1) & isDicePlayed(2) & isDicePlayed(3);
+		return isDicePlayed(1) && isDicePlayed(2) && isDicePlayed(3);
+	}
+	public boolean isGamePartyStarted() {
+		return isDicePlayed(1) || isDicePlayed(2) || isDicePlayed(3);
 	}
 
 	public int[] getResults() {
